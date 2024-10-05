@@ -15,33 +15,33 @@ public class MajorPageServiceImpl implements MajorPageService{
                     "fields",
                     List.of("firstName", "lastName"),
                     "exempl",
-                    List.of("/employee/add?firstName=Ivan&lastName=Ivanov ")));
+                    List.of("/employee/add?firstName=Ivan&lastName=Ivanov&department=1&salary=25000")));
 
     public String getAllInfo() {
-        String info = "все страница и информация как их использывать:\n";
+        StringBuilder info = new StringBuilder("все страница и информация как их использывать:\n");
         for (String s : pages) {
 
-            String pages = "";
+            StringBuilder pages = new StringBuilder();
             for (String s1 : infoPage.get(s).get("pages")) {
-                pages += "| " + s1 + "| ";
+                pages.append("| ").append(s1).append("| ");
             }
 
-            String fields = "";
+            StringBuilder fields = new StringBuilder();
             for (String s1 : infoPage.get(s).get("fields")) {
-                fields += "| " + s1 + "| ";
+                fields.append("| ").append(s1).append("| ");
             }
 
-            String exempl = "";
+            StringBuilder exempl = new StringBuilder();
             for (String s1 : infoPage.get(s).get("exempl")) {
-                exempl += "| " + s1 + "| ";
+                exempl.append("| ").append(s1).append("| ");
             }
 
-            info += String.format("страницы %s <br><br>" +
+            info.append(String.format("страницы %s <br><br>" +
                     "   методы: %s<br><br>" +
                     "   поля ввода: %s<br><br>" +
-                    "       пример: %s<br><br>", s, pages, fields, exempl);
+                    "       пример: %s<br><br>", s, pages.toString(), fields.toString(), exempl.toString()));
         }
-        return info;
+        return info.toString();
     }
 
 

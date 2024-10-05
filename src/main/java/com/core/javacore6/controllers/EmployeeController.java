@@ -1,6 +1,6 @@
 package com.core.javacore6.controllers;
 
-import com.core.javacore6.Employee;
+import com.core.javacore6.models.Employee;
 import com.core.javacore6.exemples.EmployeeAlreadyAddedException;
 import com.core.javacore6.exemples.EmployeeNotFoundException;
 import com.core.javacore6.exemples.EmployeeStorageIsFullException;
@@ -8,39 +8,33 @@ import com.core.javacore6.services.EmployeeService;
 import com.core.javacore6.services.EmployeeServiceImpl;
 import com.core.javacore6.services.MajorPageService;
 import com.core.javacore6.services.MajorPageServiceImpl;
-import org.apache.coyote.Response;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
-    private final MajorPageService majorPageService;
+
 
     public EmployeeController() {
         employeeService = new EmployeeServiceImpl();
-        majorPageService = new MajorPageServiceImpl();
     }
+
 
     @GetMapping
-    public String major() {
-        return majorPageService.getAllInfo();
-    }
-
-    @GetMapping("/employee")
     public List<Employee> allEmployee() {
         return employeeService.getEmployeeList();
     }
 
-    @GetMapping("/employee/add")
+    @GetMapping("/add")
     public Employee add(@RequestParam("firstName") String firstName,
-                        @RequestParam("lastName") String lastName) {
-        return employeeService.addEmployee(firstName, lastName);
+                        @RequestParam("lastName") String lastName,
+                        @RequestParam("department") int department,
+                        @RequestParam("salary") double salary) {
+        return employeeService.addEmployee(firstName, lastName, department, salary);
     }
 
     @ExceptionHandler(EmployeeAlreadyAddedException.class)
@@ -53,7 +47,7 @@ public class EmployeeController {
         return "превышен лимит количества сотрудников в фирме (" + e.getClass() + ")";
     }
 
-    @GetMapping("/employee/remove")
+    @GetMapping("/remove")
     public Employee remove(@RequestParam("firstName") String firstName,
                            @RequestParam("lastName") String lastName) {
         return employeeService.delEmployee(firstName, lastName);
@@ -64,7 +58,7 @@ public class EmployeeController {
         return "сотрудник не найден (" + e + ")";
     }
 
-    @GetMapping("/employee/find")
+    @GetMapping("/find")
     public Employee find(@RequestParam("firstName") String firstName,
                          @RequestParam("lastName") String lastName) {
 
