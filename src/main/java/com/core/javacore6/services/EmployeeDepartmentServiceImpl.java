@@ -15,7 +15,6 @@ public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService 
     @Override
     public List<Employee> getEmployeesForDepartment(int department) {
         List<Employee> employees = employeeService.getEmployeeList();
-        System.out.println(employees);
         return employees.stream().
                 filter(employee -> employee != null && employee.getDepartment() == department).toList();
     }

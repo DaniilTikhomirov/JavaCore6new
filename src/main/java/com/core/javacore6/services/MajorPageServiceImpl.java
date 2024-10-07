@@ -8,14 +8,20 @@ import java.util.Map;
 
 @Service
 public class MajorPageServiceImpl implements MajorPageService{
-    private final List<String> pages = List.of("/employee");
+    private final List<String> pages = List.of("/employee", "/departments");
     private final Map<String, Map<String, List<String>>> infoPage = Map.of("/employee",
             Map.of("pages",
                     List.of("add", "remove", "find"),
                     "fields",
                     List.of("firstName", "lastName"),
                     "exempl",
-                    List.of("/employee/add?firstName=Ivan&lastName=Ivanov&department=1&salary=25000")));
+                    List.of("/employee/add?firstName=Ivan&lastName=Ivanov&department=1&salary=25000")),
+            "/departments", Map.of("pages",
+                    List.of("max-salary", "min-salary", "all"),
+                    "fields",
+                    List.of("departmentId"),
+                    "exempl",
+                    List.of("/departments/max-salary?departmentId=5")));
 
     public String getAllInfo() {
         StringBuilder info = new StringBuilder("все страница и информация как их использывать:\n");

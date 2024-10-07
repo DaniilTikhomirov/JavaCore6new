@@ -12,8 +12,8 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private final List<Employee> employeeList = new ArrayList<>();
-    private final int maxEmployees = 5;
+    private final static List<Employee> employeeList = new ArrayList<>();
+    private final static int maxEmployees = 5;
 
 
     public int getMaxEmployees() {

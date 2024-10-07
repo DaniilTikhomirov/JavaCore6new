@@ -31,9 +31,16 @@ public class EmployeeDepartmentController {
     }
 
     @GetMapping("/all")
-    public List<Employee> allFromDepartment(@RequestParam(value = "departmentId", required = false) int departmentId) {
-        return edService.getEmployeesForDepartment(departmentId);
+    public List<Employee> allFromDepartment(@RequestParam(value = "departmentId", required = false) String departmentId) {
+        if (departmentId != null) {
+            int department = Integer.parseInt(departmentId);
+            return edService.getEmployeesForDepartment(department);
+        }
+        return edService.getEmployeesSortDepartment();
+
     }
+
+
 
     @ExceptionHandler(EmployeeNotFoundException.class)
     public String notFoundException(EmployeeNotFoundException e) {
