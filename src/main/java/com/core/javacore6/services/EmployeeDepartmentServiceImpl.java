@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService {
@@ -43,9 +45,10 @@ public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService 
     }
 
     @Override
-    public List<Employee> getEmployeesSortDepartment() {
+    public Map<Integer, List<Employee>> getEmployeesSortDepartment() {
         List<Employee> employees = employeeService.getEmployeeList();
-        return employees.stream().sorted(Comparator.comparingDouble(Employee::getDepartment)).toList();
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 
 

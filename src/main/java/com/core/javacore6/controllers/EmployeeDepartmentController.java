@@ -10,6 +10,7 @@ import com.core.javacore6.services.EmployeeServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/departments")
@@ -30,14 +31,14 @@ public class EmployeeDepartmentController {
         return edService.minSalaryForDepartment(departmentId);
     }
 
-    @GetMapping("/all")
-    public List<Employee> allFromDepartment(@RequestParam(value = "departmentId", required = false) String departmentId) {
-        if (departmentId != null) {
-            int department = Integer.parseInt(departmentId);
-            return edService.getEmployeesForDepartment(department);
-        }
+    @GetMapping()
+    public Map<Integer, List<Employee>> allFromDepartment() {
         return edService.getEmployeesSortDepartment();
+    }
 
+    @GetMapping("/all")
+    public List<Employee> allFromDepartment(@RequestParam(value = "departmentId") int departmentId){
+        return edService.getEmployeesForDepartment(departmentId);
     }
 
 

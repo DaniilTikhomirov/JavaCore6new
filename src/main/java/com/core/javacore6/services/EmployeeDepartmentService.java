@@ -3,8 +3,11 @@ package com.core.javacore6.services;
 import com.core.javacore6.models.Employee;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeDepartmentService {
+
+    Map<Integer, List<Employee>> getEmployeesSortDepartment();
 
     List<Employee> getEmployeesForDepartment(int department);
 
@@ -12,6 +15,4 @@ public interface EmployeeDepartmentService {
 
     double maxSalaryForDepartment(int department);
 
-
-    List<Employee> getEmployeesSortDepartment();
 }
