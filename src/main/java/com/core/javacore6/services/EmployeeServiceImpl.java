@@ -25,8 +25,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(String firstName, String lastName, int department, double salary) {
         checkName(firstName, lastName);
-        Employee employee = new Employee(StringUtils.capitalize(firstName),
-                StringUtils.capitalize(lastName),
+        Employee employee = new Employee(StringUtils.capitalize(firstName.toLowerCase()),
+                StringUtils.capitalize(lastName.toLowerCase()),
                 department, salary);
         if (employeeList.size() >= maxEmployees) {
             throw new EmployeeStorageIsFullException("превышен лимит количества сотрудников в фирме");
