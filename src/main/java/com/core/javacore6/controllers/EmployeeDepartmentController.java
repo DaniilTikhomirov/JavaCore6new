@@ -7,6 +7,7 @@ import com.core.javacore6.services.EmployeeDepartmentService;
 import com.core.javacore6.services.EmployeeDepartmentServiceImpl;
 import com.core.javacore6.services.EmployeeService;
 import com.core.javacore6.services.EmployeeServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,9 @@ import java.util.Map;
 public class EmployeeDepartmentController {
     private final EmployeeDepartmentService edService;
 
-    public EmployeeDepartmentController() {
-        this.edService = new EmployeeDepartmentServiceImpl();
+    @Autowired
+    public EmployeeDepartmentController(EmployeeService employeeService) {
+        this.edService = new EmployeeDepartmentServiceImpl(employeeService);
     }
 
     @GetMapping("/max-salary")

@@ -8,6 +8,7 @@ import com.core.javacore6.services.EmployeeService;
 import com.core.javacore6.services.EmployeeServiceImpl;
 import com.core.javacore6.services.MajorPageService;
 import com.core.javacore6.services.MajorPageServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-
-    public EmployeeController() {
-        employeeService = new EmployeeServiceImpl();
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
 

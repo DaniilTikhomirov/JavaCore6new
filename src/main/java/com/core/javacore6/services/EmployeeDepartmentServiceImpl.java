@@ -3,6 +3,8 @@ package com.core.javacore6.services;
 
 import com.core.javacore6.exemples.EmployeeNotFoundException;
 import com.core.javacore6.models.Employee;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -13,7 +15,19 @@ import java.util.stream.Stream;
 
 @Service
 public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService {
-    EmployeeService employeeService = new EmployeeServiceImpl();
+
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeDepartmentServiceImpl(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @PostConstruct
+    private void setUp() {
+        System.out.println(employeeService.getEmployeeList());
+    }
+
 
     @Override
     public List<Employee> getEmployeesForDepartment(int department) {
@@ -21,6 +35,7 @@ public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService 
     }
 
     private Stream<Employee> getStreamEmployeesForDepartment(int department) {
+        System.out.println(employeeService.getEmployeeList().toString());
         List<Employee> employees = employeeService.getEmployeeList();
         return employees.stream().
                 filter(employee -> employee != null && employee.getDepartment() == department);
