@@ -15,4 +15,5 @@ public interface EmployeeDepartmentService {
 
     double maxSalaryForDepartment(int department);
 
+    double sumForDepartment(int department);
 }

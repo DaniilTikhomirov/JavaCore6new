@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/department")
 public class EmployeeDepartmentController {
     private final EmployeeDepartmentService edService;
 
@@ -23,24 +23,29 @@ public class EmployeeDepartmentController {
         this.edService = new EmployeeDepartmentServiceImpl(employeeService);
     }
 
-    @GetMapping("/max-salary")
-    public double maxSalary(@RequestParam("departmentId") int departmentId) {
-        return edService.maxSalaryForDepartment(departmentId);
+    @GetMapping("{id}/salary/max")
+    public double maxSalary(@PathVariable int id) {
+        return edService.maxSalaryForDepartment(id);
     }
 
-    @GetMapping("/min-salary")
-    public double minSalary(@RequestParam("departmentId") int departmentId) {
-        return edService.minSalaryForDepartment(departmentId);
+    @GetMapping("{id}/salary/min")
+    public double minSalary(@PathVariable int id) {
+        return edService.minSalaryForDepartment(id);
     }
 
-    @GetMapping()
+    @GetMapping("/employees")
     public Map<Integer, List<Employee>> allFromDepartment() {
         return edService.getEmployeesSortDepartment();
     }
 
-    @GetMapping("/all")
-    public List<Employee> allFromDepartment(@RequestParam(value = "departmentId") int departmentId){
-        return edService.getEmployeesForDepartment(departmentId);
+    @GetMapping("{id}/employees")
+    public List<Employee> allFromDepartment(@PathVariable int id){
+        return edService.getEmployeesForDepartment(id);
+    }
+
+    @GetMapping("{id}/salary/sum")
+    public String sumFromDepartment(@PathVariable int id){
+        return String.valueOf(edService.sumForDepartment(id));
     }
 
 

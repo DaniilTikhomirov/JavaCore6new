@@ -3,7 +3,6 @@ package com.core.javacore6.services;
 
 import com.core.javacore6.exemples.EmployeeNotFoundException;
 import com.core.javacore6.models.Employee;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +62,18 @@ public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService 
         List<Employee> employees = employeeService.getEmployeeList();
         return employees.stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
+    }
+
+    @Override
+    public double sumForDepartment(int department){
+        List<Employee> employees = employeeService.getEmployeeList();
+        double counter = 0.0;
+        for (Employee e : employees){
+            if(e != null && e.getDepartment() == department){
+                counter += e.getSalary();
+            }
+        }
+        return counter;
     }
 
 

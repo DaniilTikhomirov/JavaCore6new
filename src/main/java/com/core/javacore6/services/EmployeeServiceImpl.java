@@ -85,8 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
-    @Override
-    public boolean containsEmployee(Employee employee) {
+    private boolean containsEmployee(Employee employee) {
         for (Employee e : employeeList) {
             if (e.equals(employee)) {
                 return true;

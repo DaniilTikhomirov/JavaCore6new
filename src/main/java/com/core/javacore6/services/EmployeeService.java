@@ -9,7 +9,6 @@ public interface EmployeeService {
     Employee findEmployee(String firstName, String lastName);
     int findIndexEmployee(String firstName, String lastName);
     Employee delEmployee(String firstName, String lastName);
-    boolean containsEmployee(Employee employee);
     List<Employee> getEmployeeList();
     int getMaxEmployees();
 }
