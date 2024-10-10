@@ -2,8 +2,11 @@ package com.core.javacore6.services;
 
 import com.core.javacore6.models.Basket;
 
-public interface StoreBasket {
-    Basket getBasket();
+import java.util.List;
+import java.util.Set;
 
-    Integer addToBasket(Integer ID);
+public interface StoreBasket {
+    Set<Integer> getBasket();
+
+    List<Integer> addToBasket(List<Integer> IDs);
 }

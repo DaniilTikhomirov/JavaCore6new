@@ -23,12 +23,6 @@ public class EmployeeDepartmentServiceImpl implements EmployeeDepartmentService 
         this.employeeService = employeeService;
     }
 
-    @PostConstruct
-    private void setUp() {
-        System.out.println(employeeService.getEmployeeList());
-    }
-
-
     @Override
     public List<Employee> getEmployeesForDepartment(int department) {
         return getStreamEmployeesForDepartment(department).toList();
