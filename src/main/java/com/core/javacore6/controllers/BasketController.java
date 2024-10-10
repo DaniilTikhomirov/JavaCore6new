@@ -31,7 +31,7 @@ public class BasketController {
 
     @GetMapping("/add")
     public List<Integer> addToBasket(@RequestParam("ID") String ID) {
-        String[] Ids = ID.split(", ");
+        String[] Ids = ID.split(",");
 
         return storeBasket.addToBasket(Arrays.stream(Ids).map(Integer::parseInt).toList());
     }
